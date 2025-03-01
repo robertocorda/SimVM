@@ -39,3 +39,5 @@ build/
 .idea/misc.xml
 
 .idea/
+
+*.versionsBackup
