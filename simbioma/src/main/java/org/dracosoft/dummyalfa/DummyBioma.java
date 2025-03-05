@@ -10,8 +10,7 @@ public class DummyBioma implements Bioma {
 
     private Direction direction = Direction.NORTH;
     private int energy = 10; // esempio
-    private Brain brain;
-    private EnvironmentIO environmentIO;
+    private DecisionEngine decisionEngine;
 
     // Mappa di azioni integrate (PUSH, STILL, ROTATE...).
     // Ogni azione riduce energy di 1 tranne STILL.
@@ -22,8 +21,8 @@ public class DummyBioma implements Bioma {
     }
 
     @Override
-    public void setBrain(Brain brain) {
-        this.brain = brain;
+    public void setBrain(DecisionEngine decisionEngine) {
+        this.decisionEngine = decisionEngine;
     }
 
     @Override
@@ -40,19 +39,16 @@ public class DummyBioma implements Bioma {
     @Override
     public BiomaIntent senseAndDecide(SenseData input) {
         // Se non ho un cervello, non faccio nulla
-        NoIntent nointent = new NoIntent("NOP");
-        if (brain == null) {
+        NoIntent nointent = new NoIntent();
+        if (decisionEngine == null) {
             return nointent;
         }
         // Se non ho energia, sto fermo (non eseguo nulla)
         if (energy <= 0) {
-            if (environmentIO != null) {
-                environmentIO.log("[DummyBioma] Energia esaurita, nessuna azione possibile.");
-            }
             return nointent;
         }
         // Chiedo al brain quale azione fare
-        BiomaIntent intent = brain.decideNextAction(this, input);
+        BiomaIntent intent = decisionEngine.decideNextAction(this, input);
 
         performInnerAction(intent);
 
@@ -64,21 +60,15 @@ public class DummyBioma implements Bioma {
      */
     private void performInnerAction(BiomaIntent intent) {
 
-        String actionName = intent.getAction();
+        BiomaCommand command = intent.getCommand();
 
         if (energy <= 0) {
-            if (environmentIO != null) {
-                environmentIO.log("[DummyBioma] Energia=0, non posso agire.");
-            }
             return;
         }
         // Cerco l'azione built-in
-        Consumer<DummyBioma> action = builtInActions.get(actionName.toUpperCase());
+        Consumer<DummyBioma> action = builtInActions.get(command);
         if (action == null) {
             // Azione sconosciuta
-            if (environmentIO != null) {
-                environmentIO.log("[DummyBioma] Azione sconosciuta: " + actionName);
-            }
             return;
         }
         // Eseguo
@@ -90,18 +80,11 @@ public class DummyBioma implements Bioma {
 
         // PUSH: chiede all'env di spostare il bioma, consuma 1 energy
         actions.put("PUSH", (self) -> {
-            if (self.environmentIO != null) {
-                boolean success = self.environmentIO.push(self);
-                self.environmentIO.log("[DummyBioma] Action= PUSH, success=" + success);
-            }
             self.energy--;
         });
 
         // STILL: non fa nulla, non consuma energy
         actions.put("STILL", (self) -> {
-            if (self.environmentIO != null) {
-                self.environmentIO.log("[DummyBioma] Action= STILL (no energy cost).");
-            }
             // nessun decremento di energy
         });
 
@@ -109,10 +92,6 @@ public class DummyBioma implements Bioma {
         actions.put("ROTATE", (self) -> {
             self.direction = rotateRight(self.direction);
             self.energy--;
-            if (self.environmentIO != null) {
-                self.environmentIO.log("[DummyBioma] Action= ROTATE -> "
-                        + self.direction + ", energy=" + self.energy);
-            }
         });
 
         return actions;

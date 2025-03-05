@@ -11,7 +11,7 @@ public class MainDemo {
         // Creiamo un bioma
         DummyBioma bioma = new DummyBioma();
         // Impostiamo il cervello del bioma
-        bioma.setBrain(new DummyBrain());
+        bioma.setBrain(new DummyFixedDecisionEngine());
 
         // Registriamo il bioma nell'ambiente: l'ambiente sa dove si trova
         // (es. posizione iniziale (0, 0))

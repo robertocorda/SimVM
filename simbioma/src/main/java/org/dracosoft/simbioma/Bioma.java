@@ -12,7 +12,7 @@ public interface Bioma {
     /**
      * Imposta il "cervello" (Brain) che deciderà le azioni del Bioma.
      */
-    void setBrain(Brain brain);
+    void setBrain(DecisionEngine decisionEngine);
 
     /**
      * Restituisce la direzione attuale.

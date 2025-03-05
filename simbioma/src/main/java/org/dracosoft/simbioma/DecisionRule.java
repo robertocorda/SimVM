@@ -12,7 +12,7 @@ public abstract class DecisionRule {
     /**
      * Restituisce l'azione associata a questa regola.
      */
-    public abstract String getAction();
+    public abstract BiomaCommand getCommand();
 
     /**
      * Restituisce il peso (urgenza) della regola, un valore da 1 a 100.
@@ -21,8 +21,12 @@ public abstract class DecisionRule {
 
     public String toString() {
         return "(Rule:" + getName() +
-                " Action:" + getAction() +
+                " Action:" + getCommand() +
                 " Weight:" + getWeight() + ")";
+    }
+
+    public static DecisionRule defaultRule() {
+        return new DefaultRule("STILL");
     }
 
 

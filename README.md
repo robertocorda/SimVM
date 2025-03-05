@@ -9,6 +9,11 @@ una virtual machine per un microlinguaggio in stile assembly
 # Simbioma
 * delle entità che posso avere in input un programma scritto nel linguaggio Simvm che le fa muovere ed interagire
 
+COMMAND è qualcosa che bioma vuole fare
+ACTION è qualcosa che succede nell'enviroment
+
+COMMAND push ACTION move
+
 
 
 

@@ -1,5 +1,6 @@
 package org.dracosoft.dummyalfa;
 
+import org.dracosoft.simbioma.BiomaCommand;
 import org.dracosoft.simbioma.DecisionRule;
 import org.dracosoft.simbioma.SenseData;
 
@@ -21,8 +22,8 @@ public class PushRule extends DecisionRule {
     }
 
     @Override
-    public String getAction() {
-        return "PUSH";
+    public BiomaCommand getCommand() {
+        return BiomaCommand.PUSH;
     }
 
     @Override

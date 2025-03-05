@@ -4,18 +4,19 @@ import org.dracosoft.simbioma.*;
 
 import java.util.List;
 
-public class DummyBrain implements Brain {
+public class DummyFixedDecisionEngine implements DecisionEngine {
 
     private final DecisionEngine decisionEngine;
 
-    public DummyBrain() {
+    public DummyFixedDecisionEngine() {
         // Configuriamo le regole: l'ordine determina la priorità
         List<DecisionRule> rules = List.of(
-                new RotateRule(80),  // Se la distanza < 5 e la velocità > 2, ruota
-                new PushRule(60)     // Se la distanza < 5 e il colore è RED, spingi
+                new RotateRule(50),  // Se la distanza < 5 e la velocità > 2, ruota
+                new PushRule(50)     // Se la distanza < 5 e il colore è RED, spingi
         );
         // Azione di default: se nessuna regola si applica, stai fermo
-        this.decisionEngine = new DecisionEngine(rules, "STILL");
+        //this.decisionEngine = new DecisionEngineMax(rules);
+        this.decisionEngine = new DecisionEngineRandom(rules);
     }
 
     @Override

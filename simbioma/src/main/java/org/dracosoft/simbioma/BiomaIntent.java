@@ -2,13 +2,13 @@ package org.dracosoft.simbioma;
 
 public class BiomaIntent {
 
-    private final String command; // Es. "PUSH"
+    private final BiomaCommand command; // Es. "PUSH"
 
-    public BiomaIntent(String command) {
+    public BiomaIntent(BiomaCommand command) {
         this.command = command;
     }
 
-    public String getAction() {
+    public BiomaCommand getCommand() {
         return command;
     }
 

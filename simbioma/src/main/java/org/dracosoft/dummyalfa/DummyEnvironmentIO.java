@@ -93,16 +93,31 @@ public class DummyEnvironmentIO implements EnvironmentIO {
     @Override
     public boolean applyIntent(Bioma bioma, BiomaIntent intent) {
 
-        String action = intent.getAction();
+        BiomaCommand command = intent.getCommand();
 
-        EnvironmentPhy environmentPhy = EnvironmentPhy.valueOf(action.toUpperCase());
-        boolean result = switch (environmentPhy) {
-            case PUSH -> {
+
+        EnvironmentAction environmentAction = mapToEnvAction(command);
+        boolean result = switch (environmentAction) {
+            case MOVE -> {
                 yield push(bioma);
             }
             default -> false;
         };
         return result;
+    }
+
+    private EnvironmentAction mapToEnvAction(BiomaCommand command) {
+
+        switch (command) {
+            case PUSH:
+                return EnvironmentAction.MOVE;
+            case STILL, ROTATE:
+                return EnvironmentAction.NOP;
+            default:
+                throw new IllegalArgumentException("Valore non supportato: " + command);
+        }
+
+
     }
 }
 
