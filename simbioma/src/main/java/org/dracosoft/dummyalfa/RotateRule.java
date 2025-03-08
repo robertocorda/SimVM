@@ -29,7 +29,7 @@ public class RotateRule extends DecisionRule {
     }
 
     @Override
-    public int getWeight() {
+    public int getWeight(SenseData sense) {
         return weight;
     }
 }

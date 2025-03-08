@@ -26,13 +26,13 @@ public class DecisionEngineRandom extends DecisionEngineBase {
         for (DecisionRule rule : rules) {
             if (rule.applies(sense)) {
                 applicableRules.add(rule);
-                totalWeight += rule.getWeight();
+                totalWeight += rule.getWeight(sense);
             }
         }
 
         // Se nessuna regola si applica, ritorna null
         if (totalWeight == 0) {
-            return null;
+            return new DefaultRule(BiomaCommand.STILL);
         }
 
         // Genera un numero casuale tra 0 (incluso) e totalWeight (escluso)
@@ -43,7 +43,7 @@ public class DecisionEngineRandom extends DecisionEngineBase {
         System.out.println("decideNextAction randomValue:" + randomValue);
         // Itera sulle regole sottraendo il peso di ciascuna dal valore casuale
         for (DecisionRule rule : applicableRules) {
-            randomValue -= rule.getWeight();
+            randomValue -= rule.getWeight(sense);
             if (randomValue < 0) {
                 return rule;
             }

@@ -3,13 +3,13 @@ package org.dracosoft.dummyalfa;
 import org.dracosoft.simbioma.BiomaIntent;
 import org.dracosoft.simbioma.SenseData;
 
-public class MainDemo {
+public class MainDummyDemo {
     public static void main(String[] args) {
         // Creiamo l'ambiente
         DummyEnvironmentIO environment = new DummyEnvironmentIO();
 
         // Creiamo un bioma
-        DummyBioma bioma = new DummyBioma();
+        DummyBioma bioma = new DummyBioma("test");
         // Impostiamo il cervello del bioma
         bioma.setBrain(new DummyFixedDecisionEngine());
 

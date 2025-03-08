@@ -32,7 +32,7 @@ public class MainTestDsl {
             System.out.println(" - Applies? " + applies);
             if (applies && rule instanceof DslDecisionRule) {
                 DslDecisionRule dslRule = (DslDecisionRule) rule;
-                int computedWeight = dslRule.computeWeight(sampleSense);
+                int computedWeight = dslRule.getWeight(sampleSense);
                 System.out.println(" - Computed weight: " + computedWeight);
                 System.out.println(" - Action: " + rule.getCommand());
             }

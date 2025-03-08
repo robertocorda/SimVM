@@ -2,6 +2,8 @@ package org.dracosoft.simbioma;
 
 public interface Bioma {
 
+    String getName();
+
     /**
      * Direzioni di base.
      */

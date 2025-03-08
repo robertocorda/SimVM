@@ -30,7 +30,7 @@ public class DefaultRule extends DecisionRule {
     }
 
     @Override
-    public int getWeight() {
-        return 100;
+    public int getWeight(SenseData sense) {
+        return 0;
     }
 }

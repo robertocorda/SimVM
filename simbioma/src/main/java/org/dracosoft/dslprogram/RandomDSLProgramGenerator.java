@@ -165,7 +165,7 @@ public class RandomDSLProgramGenerator {
 
 
             DslDecisionRule dslRule = (DslDecisionRule) rule;
-            int computedWeight = dslRule.computeWeight(senseData);
+            int computedWeight = dslRule.getWeight(senseData);
 
             System.out.println(
                     "prog: dslProgram " + dslProgram + "\n"

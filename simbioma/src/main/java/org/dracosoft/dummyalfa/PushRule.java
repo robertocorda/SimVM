@@ -27,7 +27,7 @@ public class PushRule extends DecisionRule {
     }
 
     @Override
-    public int getWeight() {
+    public int getWeight(SenseData sense) {
         return weight;
     }
 }

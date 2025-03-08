@@ -25,7 +25,7 @@ public class DecisionEngineMax extends DecisionEngineBase {
         DecisionRule chosenRule = null;
         for (DecisionRule rule : rules) {
             if (rule.applies(data)) {
-                int w = rule.getWeight();
+                int w = rule.getWeight(data);
                 if (w > maxWeight) {
                     maxWeight = w;
                     chosenRule = rule;
@@ -34,12 +34,11 @@ public class DecisionEngineMax extends DecisionEngineBase {
             }
         }
 
-        System.out.println("decideNextAction chosenRule:" + chosenRule.toString());
-
-
         if (chosenRule == null) {
             chosenRule = defaultRule;
         }
+
+        System.out.println("decideNextAction chosenRule:" + chosenRule.toString());
 
         BiomaIntent intent = new BiomaIntent(chosenRule.getCommand());
 

@@ -54,7 +54,7 @@ public class DslDecisionRule extends DecisionRule {
     /**
      * Calcola il peso in base ai dati sensoriali e lo normalizza tra 1 e 100.
      */
-    public int computeWeight(SenseData data) {
+    private int computeWeight(SenseData data) {
         int raw = weightFunction.applyAsInt(data);
         // Normalizzazione: se raw < 1, restituisce 1; se raw > 100, restituisce 100
         if (raw < 1) {
@@ -66,13 +66,9 @@ public class DslDecisionRule extends DecisionRule {
         }
     }
 
-    /**
-     * Per l'interfaccia, getWeight() senza parametri non ha senso se il peso è dinamico.
-     * Qui ritorniamo un valore fisso di default oppure lanciamo un'eccezione.
-     */
     @Override
-    public int getWeight() {
-        throw new UnsupportedOperationException("Utilizzare computeWeight(SenseData data) per ottenere il peso dinamico.");
+    public int getWeight(SenseData sense) {
+        return computeWeight(sense);
     }
 
 }

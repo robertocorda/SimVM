@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 
 public class DummyBioma implements Bioma {
 
+    private final String name;
     private Direction direction = Direction.NORTH;
     private int energy = 10; // esempio
     private DecisionEngine decisionEngine;
@@ -16,8 +17,16 @@ public class DummyBioma implements Bioma {
     // Ogni azione riduce energy di 1 tranne STILL.
     private final Map<String, Consumer<DummyBioma>> builtInActions;
 
-    public DummyBioma() {
+
+
+    public DummyBioma(String name) {
+        this.name = name;
         this.builtInActions = createBuiltInActions();
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -50,15 +59,13 @@ public class DummyBioma implements Bioma {
         // Chiedo al brain quale azione fare
         BiomaIntent intent = decisionEngine.decideNextAction(this, input);
 
-        performInnerAction(intent);
-
         return intent;
     }
 
     /*
     cambia lo stato interno del sistema
      */
-    private void performInnerAction(BiomaIntent intent) {
+    public void performInnerAction(BiomaIntent intent) {
 
         BiomaCommand command = intent.getCommand();
 

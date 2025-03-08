@@ -17,12 +17,12 @@ public abstract class DecisionRule {
     /**
      * Restituisce il peso (urgenza) della regola, un valore da 1 a 100.
      */
-    public abstract int getWeight();
+    public abstract int getWeight(SenseData sense);
 
     public String toString() {
         return "(Rule:" + getName() +
-                " Action:" + getCommand() +
-                " Weight:" + getWeight() + ")";
+                " Action:" + getCommand() +")";
+                //" Weight:" + getWeight(sense) + ")";
     }
 
     public static DecisionRule defaultRule() {

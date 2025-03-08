@@ -106,7 +106,7 @@ public class DummyEnvironmentIO implements EnvironmentIO {
         return result;
     }
 
-    private EnvironmentAction mapToEnvAction(BiomaCommand command) {
+    protected EnvironmentAction mapToEnvAction(BiomaCommand command) {
 
         switch (command) {
             case PUSH:
