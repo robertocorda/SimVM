@@ -18,21 +18,29 @@ delle entità che posso avere in input un programma scritto nel linguaggio Simvm
 
 # ESEMPI/DOC
 ## Differenza tra commannd e action
-COMMAND: PUSH il simbioma che vuole andare in una certa direzione
+COMMAND: PUSH incdica che il simbioma vuole andare in una certa direzione
+
 INTENT contiene PUSH
-ACTION MOVE effettivamente muove il simbioma (il command PUSH può o meno determinare il movimento del SIMBIOMA)
+
+ACTION MOVE effettivamente muove il simbioma (il command PUSH può o meno determinare il movimento del SIMBIOMA a seconda dello stato dell'ENVIRONMENT)
 
 ## Esempio di RULE
-if applies {
-    if see object with
-        distance < 5 and
-        color is RED
-        and speed > 2
-} do {
-    ROTATE
-} with importance {
-    100 - (distance * 10) + (speed * 2)
-}
+
+    if applies {
+        if see object with
+            distance < 5 and
+            color is RED
+            and speed > 2
+    } do {
+        ROTATE
+    } with importance {
+        100 - (distance * 10) + (speed * 2)
+    }
+
+
+
+
+
 
 
 # @Deprecated
