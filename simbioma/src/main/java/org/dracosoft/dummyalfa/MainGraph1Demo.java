@@ -6,6 +6,7 @@ import org.dracosoft.simbioma.dsl.GeneralizedDecisionRuleParser;
 import java.util.List;
 
 // MainGraph1DemoChe.java
+
 public class MainGraph1Demo {
     public static void main(String[] args) {
         // Crea l'ambiente grafico

@@ -1,10 +1,5 @@
 package org.dracosoft.dslprogram;
 
-import org.dracosoft.simbioma.DecisionRule;
-import org.dracosoft.simbioma.SenseData;
-import org.dracosoft.simbioma.dsl.DslDecisionRule;
-import org.dracosoft.simbioma.dsl.GeneralizedDecisionRuleParser;
-
 import java.util.List;
 import java.util.Random;
 
@@ -15,6 +10,13 @@ public class RandomDSLProgramGenerator {
     private static final String[] COMMANDS = {"ROTATE", "PUSH", "STILL"};
     private static final String[] OPERATORS = {"<", ">", "<=", ">=", "=="};
 
+
+    /**
+     * Restituisce un elemento casuale dall'array.
+     */
+    private static String randomElement(String[] arr) {
+        return arr[RANDOM.nextInt(arr.length)];
+    }
     /**
      * Genera un programma DSL composto da numberOfRules regole,
      * separate da una riga vuota.
@@ -127,55 +129,4 @@ public class RandomDSLProgramGenerator {
             }
         }
     }
-
-
-    /**
-     * Restituisce un elemento casuale dall'array.
-     */
-    private static String randomElement(String[] arr) {
-        return arr[RANDOM.nextInt(arr.length)];
-    }
-
-    // Metodo main per testare la generazione
-    public static void pippo(String[] args) {
-        // Genera 10 programmi DSL casuali
-        int numPrograms = 10;
-        for (int i = 1; i <= numPrograms; i++) {
-            // Genera un numero casuale di regole per ogni programma, ad es. tra 1 e 5
-            int numRules = (int) (Math.random() * 5) + 1;
-            String program = RandomDSLProgramGenerator.generateProgram(numRules);
-            System.out.println("=== Programma DSL #" + i + " (con " + numRules + " regole) ===");
-            System.out.println(program);
-            System.out.println("-------------------------------------\n");
-        }
-    }
-
-    public static void main(String[] args) {
-
-
-        while (true) {
-            String dslProgram = RandomDSLProgramGenerator.generateProgram(1);
-            List<DecisionRule> rules = GeneralizedDecisionRuleParser.parseRules(dslProgram);
-            DecisionRule rule = rules.getFirst();
-
-
-            // Creiamo un SenseData che soddisfa la condizione: distance=3, color=RED, speed=4.
-            SenseData senseData = new SenseData(3, "RED", 4);
-            boolean applies = rule.applies(senseData);
-
-
-            DslDecisionRule dslRule = (DslDecisionRule) rule;
-            int computedWeight = dslRule.getWeight(senseData);
-
-            System.out.println(
-                    "prog: dslProgram " + dslProgram + "\n"
-                            + "senseData:" + senseData + "\n"
-                            + "applies:" + applies + "\n"
-                            + "weight:" + computedWeight + "\n");
-
-            if (applies) break;
-
-        }
-    }
 }
-
