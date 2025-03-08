@@ -74,4 +74,5 @@ public class DslDecisionRule extends DecisionRule {
     public int getWeight() {
         throw new UnsupportedOperationException("Utilizzare computeWeight(SenseData data) per ottenere il peso dinamico.");
     }
+
 }
