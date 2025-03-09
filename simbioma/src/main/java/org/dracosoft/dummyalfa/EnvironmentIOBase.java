@@ -117,5 +117,7 @@ public abstract class EnvironmentIOBase implements EnvironmentIO {
         return result;
     }
 
+    public abstract void applyAction(DummyBioma bioma, BiomaIntent intent);
+
 
 }

@@ -84,5 +84,12 @@ public class GraphicalEnvironmentIO extends EnvironmentIOBase {
             }
         }
     }
+
+    public void applyAction(DummyBioma bioma, BiomaIntent intent) {
+        switch (intent.getCommand()) {
+            case PUSH -> this.push(bioma);
+            case ROTATE -> bioma.performInnerAction(intent);
+        }
+    }
 }
 

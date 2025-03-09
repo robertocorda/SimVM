@@ -14,7 +14,8 @@ public class MainGraph1Demo {
         DummyBioma maxSim = new DummyBioma("max");
         DummyBioma antlrSim = new DummyBioma("antlr");
 
-        String dslProgram = "if applies { if see object with distance < 5 and color is RED and speed > 2 }; do { PUSH } with importance { 100 - (distance * 10) + (speed * 2) }";
+        String dslProgram =
+                "if applies { if see object with distance < 5 and color is RED and speed > 2 }; do { PUSH } with importance { 100 - (distance * 10) + (speed * 2) }";
         List<DecisionRule> parsedRules = new ManualDecisionRuleParser().parseRules(dslProgram);
         if (parsedRules.isEmpty()) {
             System.out.println("Errore: nessuna regola parsata.");
@@ -22,7 +23,7 @@ public class MainGraph1Demo {
         }
 
         String warpoleProgram = """
-                if applies { see distance < 5 and color is RED and speed > 2 } do { ROTATE } with importance { 100 };
+                if applies { see distance < 5 and color is RED and speed > 2 } do { ROTATE } with importance { 30 };
                 if applies { see distance < 5 and color is RED and speed > 2 } do { PUSH } with importance { 100 };
                 """;
 
@@ -44,19 +45,17 @@ public class MainGraph1Demo {
             System.out.println("=== TICK " + tick + " ===");
 
             DummyBioma[] biomas = {fixedSim, maxSim, antlrSim};
-            DecisionEngine[] engines = {fixedEng, maxEng, maxAntlrEng};
 
             for (int i = 0; i < biomas.length; i++) {
                 DummyBioma bioma = biomas[i];
-                DecisionEngine engine = engines[i];
 
                 SenseData senseData = env.sense(bioma);
                 System.out.println(bioma.getName() + " sense: " + senseData);
 
-                BiomaIntent intent = engine.decideNextAction(bioma, senseData);
+                BiomaIntent intent = bioma.senseAndDecide(senseData);
                 System.out.println(bioma.getName() + " decide: " + intent);
 
-                applyAction(env, bioma, intent);
+                env.applyAction(bioma, intent);
             }
 
             try {
@@ -67,10 +66,5 @@ public class MainGraph1Demo {
         }
     }
 
-    private static void applyAction(GraphicalEnvironmentIO env, DummyBioma bioma, BiomaIntent intent) {
-        switch (intent.getCommand()) {
-            case PUSH -> env.push(bioma);
-            case ROTATE -> bioma.performInnerAction(intent);
-        }
-    }
+
 }
