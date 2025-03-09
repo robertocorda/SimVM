@@ -1,15 +1,14 @@
 package org.dracosoft.simbioma.dsl;
 
-/**
- * Implementazione base della DecisionRule basata sul DSL.
- * Questa classe memorizza:
- * - un nome (ad esempio, derivato dalla condizione),
- * - una condizione (come Predicate<SenseData>),
- * - un comando (BiomaCommand),
- * - una funzione di calcolo del peso (ToIntFunction<SenseData>).
- *
- * Poiché il peso deve essere calcolato in base ai dati sensoriali, la funzione
- * di calcolo restituisce un intero che verrà poi normalizzato in [1,100].
+/*
+  Implementazione base della DecisionRule basata sul DSL.
+  Questa classe memorizza:
+  - un nome (ad esempio, derivato dalla condizione),
+  - una condizione (come Predicate<SenseData>),
+  - un comando (BiomaCommand),
+  - una funzione di calcolo del peso (ToIntFunction<SenseData>).
+  Poiché il peso deve essere calcolato in base ai dati sensoriali, la funzione
+  di calcolo restituisce un intero che verrà poi normalizzato in [1,100].
  */
 import org.dracosoft.simbioma.BiomaCommand;
 import org.dracosoft.simbioma.DecisionRule;
@@ -59,11 +58,7 @@ public class DslDecisionRule extends DecisionRule {
         // Normalizzazione: se raw < 1, restituisce 1; se raw > 100, restituisce 100
         if (raw < 1) {
             return 1;
-        } else if (raw > 100) {
-            return 100;
-        } else {
-            return raw;
-        }
+        } else return Math.min(raw, 100);
     }
 
     @Override

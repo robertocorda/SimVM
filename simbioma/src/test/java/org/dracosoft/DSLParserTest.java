@@ -3,13 +3,13 @@ package org.dracosoft;
 import org.dracosoft.simbioma.BiomaCommand;
 import org.dracosoft.simbioma.DecisionRule;
 import org.dracosoft.simbioma.SenseData;
-import org.dracosoft.simbioma.dsl.DecisionRuleParser;
 import org.dracosoft.simbioma.dsl.DslDecisionRule;
 import org.dracosoft.simbioma.dsl.GeneralizedDecisionRuleParser;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DSLParserTest {
 
@@ -27,21 +27,21 @@ public class DSLParserTest {
     public void testRotateRuleApplies() {
         String dslProgram =
                 """
-                if applies { 
-                   if see object with 
-                        distance < 5 and 
-                        color is RED 
-                        and speed > 2 
-                } do { 
-                    ROTATE 
-                } 
-                with importance { 
-                    100 - (distance * 10) + (speed * 2) 
-                }
-                """;
+                        if applies {
+                           if see object with
+                                distance < 5 and
+                                color is RED
+                                and speed > 2
+                        } do {
+                            ROTATE
+                        }
+                        with importance {
+                            100 - (distance * 10) + (speed * 2)
+                        }
+                        """;
 
-
-        List<DecisionRule> rules = GeneralizedDecisionRuleParser.parseRules(dslProgram);
+        GeneralizedDecisionRuleParser parser = new GeneralizedDecisionRuleParser();
+        List<DecisionRule> rules = parser.parseRules(dslProgram);
         assertNotNull(rules, "La lista di regole non deve essere null.");
         assertEquals(1, rules.size(), "Ci si aspetta una e una sola regola.");
 
@@ -61,7 +61,7 @@ public class DSLParserTest {
         // Calcoliamo il peso utilizzando il metodo specifico (computeWeight) di DSLDecisionRule.
         assertInstanceOf(DslDecisionRule.class, rule, "La regola deve essere un'istanza di DSLDecisionRule.");
         DslDecisionRule dslRule = (DslDecisionRule) rule;
-        int computedWeight = dslRule.computeWeight(senseData);
+        int computedWeight = dslRule.getWeight(senseData);
         int expectedWeight = 100 - (3 * 10) + (4 * 2); // 100 - 30 + 8 = 78
         assertEquals(expectedWeight, computedWeight,
                 "Il peso calcolato deve essere " + expectedWeight + ".");
@@ -78,7 +78,7 @@ public class DSLParserTest {
      */
     @Test
     public void testPushRuleDoesNotApply() {
-        String cond = "if see object with distance <10 and color BLUE and speed <3";
+        String cond = "if see object with distance < 10 and color BLUE and speed < 3";
         String command = "PUSH";
         String importance = "50";
         String dslProgram = "if applies " +
@@ -88,7 +88,8 @@ public class DSLParserTest {
 
         System.out.println("program: " + dslProgram);
 
-        List<DecisionRule> rules = GeneralizedDecisionRuleParser.parseRules(dslProgram);
+        GeneralizedDecisionRuleParser parser = new GeneralizedDecisionRuleParser();
+        List<DecisionRule> rules = parser.parseRules(dslProgram);
         assertNotNull(rules, "La lista di regole non deve essere null.");
         assertEquals(1, rules.size(), "Ci si aspetta una sola regola.");
 

@@ -15,7 +15,8 @@ public class MainRandomDslGenerator {
 
         while (true) {
             String dslProgram = RandomDSLProgramGenerator.generateProgram(1);
-            List<DecisionRule> rules = GeneralizedDecisionRuleParser.parseRules(dslProgram);
+            GeneralizedDecisionRuleParser parser = new GeneralizedDecisionRuleParser();
+            List<DecisionRule> rules = parser.parseRules(dslProgram);
             DecisionRule rule = rules.getFirst();
 
 

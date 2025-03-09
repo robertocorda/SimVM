@@ -22,7 +22,8 @@ public class MainGraph1Demo {
         String dslProgram = "if applies { if see object with distance < 5 and color is RED and speed > 2 }; " +
                 "do { PUSH } with importance { 100 - (distance * 10) + (speed * 2) }";
         // Utilizza il parser DSL per ottenere la lista di regole
-        List<DecisionRule> parsedRules = GeneralizedDecisionRuleParser.parseRules(dslProgram);
+        GeneralizedDecisionRuleParser parser = new GeneralizedDecisionRuleParser();
+        List<DecisionRule> parsedRules = parser.parseRules(dslProgram);
         if(parsedRules.isEmpty()){
             System.out.println("Errore: nessuna regola parsata.");
             return;

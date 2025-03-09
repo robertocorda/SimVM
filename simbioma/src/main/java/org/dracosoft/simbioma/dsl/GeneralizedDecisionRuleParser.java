@@ -14,13 +14,13 @@ import javax.script.ScriptEngineManager;
 /**
  * Parser generalizzato per il DSL decisionale.
  */
-public class GeneralizedDecisionRuleParser {
+public class GeneralizedDecisionRuleParser implements ToDecisionRule {
 
     /**
      * Data una stringa contenente un solo programma DSL (TODO multi program)
      * restituisce una lista di DecisionRule.
      */
-    public static List<DecisionRule> parseRules(final String dslProgram) {
+    public List<DecisionRule> parseRules(final String dslProgram) {
 
         String cleanProgram = dslProgram.replaceAll("\\s+", " ").trim();
         List<DecisionRule> rules = new ArrayList<>();
@@ -41,7 +41,7 @@ public class GeneralizedDecisionRuleParser {
      * Aspettiamo che la regola sia della forma:
      * if applies { <condition> }; do { <command> } with importance { <importance expression> }
      */
-    private static DecisionRule parseSingleRule(String ruleText) {
+    private DecisionRule parseSingleRule(String ruleText) {
         try {
             int ifStart = ruleText.indexOf("if applies {");
             int ifEnd = ruleText.indexOf("}", ifStart);
@@ -88,7 +88,7 @@ public class GeneralizedDecisionRuleParser {
         }
     }
 
-    private static Predicate<SenseData> parseCondition(String conditionText) {
+    private Predicate<SenseData> parseCondition(String conditionText) {
         // Rimuove un eventuale prefisso "if see object with "
         String lower = conditionText.toLowerCase();
         String prefix = "if see object with ";

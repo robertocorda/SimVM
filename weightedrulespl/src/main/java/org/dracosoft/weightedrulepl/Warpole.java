@@ -10,7 +10,7 @@ import org.dracosoft.weightedrulespl.parser.WeightedRulesPlParser;
 
 import java.util.List;
 
-// Weighted Rule Progam Language
+// Weighted Rule Program Language
 public class Warpole {
     private final List<String> parserErrors;
     private final List<String> lexerErrors;
