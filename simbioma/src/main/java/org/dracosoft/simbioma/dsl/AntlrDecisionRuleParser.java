@@ -61,7 +61,7 @@ public class AntlrDecisionRuleParser implements ToDecisionRule {
     }
 
     // --------------- Metodi di parsing dei sotto-contesti -------------------
-    private Predicate<SenseData> parseCondition(org.dracosoft.weightedrulespl.parser.WeightedRulesPlParser.IfClauseContext ifCtx) {
+    private Predicate<SenseData> parseCondition(WeightedRulesPlParser.IfClauseContext ifCtx) {
         // Se la tua grammatica definisce in ifCtx un 'conditionExpr',
         // puoi estrarne i campi, oppure prendere la stringa e interpretarla.
         // Esempio minimalista (stub):
@@ -71,7 +71,7 @@ public class AntlrDecisionRuleParser implements ToDecisionRule {
         return (SenseData data) -> data.getDistance() < 5;
     }
 
-    private BiomaCommand parseCommand(org.dracosoft.weightedrulespl.parser.WeightedRulesPlParser.DoClauseContext doCtx) {
+    private BiomaCommand parseCommand(WeightedRulesPlParser.DoClauseContext doCtx) {
         // In doClause -> commandExpr -> COMMAND
         String cmdText = doCtx.commandExpr().getText();
         // es. "ROTATE" -> BiomaCommand.ROTATE

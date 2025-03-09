@@ -117,6 +117,7 @@ public abstract class EnvironmentIOBase implements EnvironmentIO {
         return result;
     }
 
+    // DUPlicato di applyIntent per dare accesso a performInnerAcrion di DummyBioma
     public abstract void applyAction(DummyBioma bioma, BiomaIntent intent);
 
 

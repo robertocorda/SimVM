@@ -16,6 +16,7 @@
     <modules>
         <module>simbioma</module>
         <module>simvm</module>
+        <module>weightedrulespl</module>
     </modules>
 
     <packaging>pom</packaging>
