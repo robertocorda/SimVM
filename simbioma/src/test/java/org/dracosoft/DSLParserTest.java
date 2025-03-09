@@ -4,7 +4,7 @@ import org.dracosoft.simbioma.BiomaCommand;
 import org.dracosoft.simbioma.DecisionRule;
 import org.dracosoft.simbioma.SenseData;
 import org.dracosoft.simbioma.dsl.DslDecisionRule;
-import org.dracosoft.simbioma.dsl.GeneralizedDecisionRuleParser;
+import org.dracosoft.simbioma.dsl.ManualDecisionRuleParser;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class DSLParserTest {
                         }
                         """;
 
-        GeneralizedDecisionRuleParser parser = new GeneralizedDecisionRuleParser();
+        ManualDecisionRuleParser parser = new ManualDecisionRuleParser();
         List<DecisionRule> rules = parser.parseRules(dslProgram);
         assertNotNull(rules, "La lista di regole non deve essere null.");
         assertEquals(1, rules.size(), "Ci si aspetta una e una sola regola.");
@@ -88,7 +88,7 @@ public class DSLParserTest {
 
         System.out.println("program: " + dslProgram);
 
-        GeneralizedDecisionRuleParser parser = new GeneralizedDecisionRuleParser();
+        ManualDecisionRuleParser parser = new ManualDecisionRuleParser();
         List<DecisionRule> rules = parser.parseRules(dslProgram);
         assertNotNull(rules, "La lista di regole non deve essere null.");
         assertEquals(1, rules.size(), "Ci si aspetta una sola regola.");

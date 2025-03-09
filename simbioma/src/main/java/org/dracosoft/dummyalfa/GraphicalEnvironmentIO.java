@@ -77,7 +77,7 @@ public class GraphicalEnvironmentIO extends EnvironmentIOBase {
                 String name = bioma.getName();
 
                 // Disegna il nome del bioma in bianco al centro del cerchio.
-                g.setColor(Color.WHITE);
+                g.setColor(Color.BLACK);
                 int stringX = screenX + (getGridSize() / 2) - (g.getFontMetrics().stringWidth(name) / 2);
                 int stringY = screenY + (getGridSize() / 2) + (g.getFontMetrics().getAscent() / 2);
                 g.drawString(name, stringX, stringY);

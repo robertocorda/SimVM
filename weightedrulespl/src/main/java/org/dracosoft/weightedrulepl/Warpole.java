@@ -29,8 +29,12 @@ public class Warpole {
     private ParseTree tree;
     private WeightedRulesPlParser parser;
 
+    public List<WeightedRulesPlParser.DecisionRuleContext> getDecisionRulesContext() {
+        return decisionRulesContext;
+    }
+
     // cached
-    private List<WeightedRulesPlParser.DecisionRuleContext> decisionRules;
+    private List<WeightedRulesPlParser.DecisionRuleContext> decisionRulesContext;
     private String tokensString;
 
     public Warpole(String program) {
@@ -81,11 +85,11 @@ public class Warpole {
         tokensString = tokensBuilder.toString();
 
         // decision rules
-        decisionRules = DecisionRuleCollector.findDecisionRules(tree);
+        decisionRulesContext = DecisionRuleCollector.findDecisionRules(tree);
     }
 
     public int decisionRulesSize() {
-        return decisionRules.size();
+        return decisionRulesContext.size();
     }
 
     public String treeAsString() {

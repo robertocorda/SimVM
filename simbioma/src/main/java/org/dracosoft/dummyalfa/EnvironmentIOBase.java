@@ -22,7 +22,7 @@ public abstract class EnvironmentIOBase implements EnvironmentIO {
     }
 
     // Dimensioni per la visualizzazione (ogni cella della griglia)
-    private final int gridSize = 50;
+    private final int gridSize = 10;
 
     /**
      * Posiziona inizialmente il bioma nell'ambiente.

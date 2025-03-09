@@ -4,7 +4,7 @@ import org.dracosoft.dslprogram.RandomDSLProgramGenerator;
 import org.dracosoft.simbioma.DecisionRule;
 import org.dracosoft.simbioma.SenseData;
 import org.dracosoft.simbioma.dsl.DslDecisionRule;
-import org.dracosoft.simbioma.dsl.GeneralizedDecisionRuleParser;
+import org.dracosoft.simbioma.dsl.ManualDecisionRuleParser;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class MainRandomDslGenerator {
 
         while (true) {
             String dslProgram = RandomDSLProgramGenerator.generateProgram(1);
-            GeneralizedDecisionRuleParser parser = new GeneralizedDecisionRuleParser();
+            ManualDecisionRuleParser parser = new ManualDecisionRuleParser();
             List<DecisionRule> rules = parser.parseRules(dslProgram);
             DecisionRule rule = rules.getFirst();
 

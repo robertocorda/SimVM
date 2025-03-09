@@ -62,59 +62,8 @@ public class AntlrDecisionRule extends DecisionRule {
                 ", Command: " + getCommand() + ")";
     }
 
-    /**
-     * Converte un DecisionRuleContext parseato in un DSLDecisionRule,
-     * interpretando ifClause, doClause e withImportanceClause.
-     */
-    public static AntlrDecisionRule fromContext(WeightedRulesPlParser.DecisionRuleContext ctx) {
-        // 1) ifClause (condizione)
-        WeightedRulesPlParser.IfClauseContext ifCtx = ctx.ifClause();
-        Predicate<SenseData> cond = parseCondition(ifCtx);
 
-        // 2) doClause (comando)
-        WeightedRulesPlParser.DoClauseContext doCtx = ctx.doClause();
-        BiomaCommand cmd = parseCommand(doCtx);
 
-        // 3) withImportanceClause (peso)
-        WeightedRulesPlParser.WithImportanceClauseContext impCtx = ctx.withImportanceClause();
-        ToIntFunction<SenseData> weightF = parseImportance(impCtx);
 
-        // Crea un nome, ad esempio estrai la condizione testuale o un generico "rule..."
-        String ruleName = "Rule@" + ctx.start.getLine() + ":" + ctx.start.getCharPositionInLine();
-
-        return new AntlrDecisionRule(ruleName, cond, cmd, weightF);
-    }
-
-    // --------------- Metodi di parsing dei sotto-contesti -------------------
-
-    private static Predicate<SenseData> parseCondition(WeightedRulesPlParser.IfClauseContext ifCtx) {
-        // Se la tua grammatica definisce in ifCtx un 'conditionExpr',
-        // puoi estrarne i campi, oppure prendere la stringa e interpretarla.
-        // Esempio minimalista (stub):
-        String text = ifCtx.conditionExpr().getText();
-        // TODO: scrivere un mini interprete per "distance < 5 and color is RED ..."
-        // Per brevità, facciamo un example stub che verifica se distance<5
-        return (SenseData data) -> data.getDistance() < 5;
-    }
-
-    private static BiomaCommand parseCommand(WeightedRulesPlParser.DoClauseContext doCtx) {
-        // In doClause -> commandExpr -> COMMAND
-        String cmdText = doCtx.commandExpr().getText();
-        // es. "ROTATE" -> BiomaCommand.ROTATE
-        return BiomaCommand.valueOf(cmdText.toUpperCase());
-    }
-
-    private static ToIntFunction<SenseData> parseImportance(WeightedRulesPlParser.WithImportanceClauseContext impCtx) {
-        String text = impCtx.importanceExpr().getText();
-        // Se è un numero costante
-        try {
-            int val = Integer.parseInt(text);
-            return (SenseData data) -> val;
-        } catch(NumberFormatException ex) {
-            // Altrimenti una formula semplice (stub).
-            // Esempio: se text contiene "distance", facciamo "100 - distance*10"
-            return (SenseData data) -> 100 - (data.getDistance() * 10);
-        }
-    }
 }
 

@@ -14,7 +14,7 @@ import javax.script.ScriptEngineManager;
 /**
  * Parser generalizzato per il DSL decisionale.
  */
-public class GeneralizedDecisionRuleParser implements ToDecisionRule {
+public class ManualDecisionRuleParser implements ToDecisionRule {
 
     /**
      * Data una stringa contenente un solo programma DSL (TODO multi program)
