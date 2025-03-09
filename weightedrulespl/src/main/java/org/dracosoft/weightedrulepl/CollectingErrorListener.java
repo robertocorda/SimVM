@@ -8,6 +8,12 @@ import java.util.List;
 public class CollectingErrorListener extends BaseErrorListener {
 
     private final List<String> errorMessages = new ArrayList<>();
+    private String type;
+
+    public CollectingErrorListener(String type) {
+        this.type = type;
+    }
+
 
     @Override
     public void syntaxError(Recognizer<?, ?> recognizer,
@@ -16,11 +22,14 @@ public class CollectingErrorListener extends BaseErrorListener {
                             int charPositionInLine,
                             String msg,
                             RecognitionException e) {
+
+        if (errorMessages.isEmpty()) {
+            errorMessages.add("Error type is " + type + " -->");
+        }
+
         String error = "line " + line + ":" + charPositionInLine + " " + msg;
-        // Salva l'errore in una lista
         errorMessages.add(error);
-        // Puoi anche loggarlo su un logger o stamparlo su console se preferisci:
-        // System.err.println("Custom error: " + error);
+
     }
 
     /**

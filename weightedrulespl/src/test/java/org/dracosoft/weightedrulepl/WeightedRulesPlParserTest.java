@@ -22,41 +22,42 @@ public class WeightedRulesPlParserTest {
     public void testParseSingleRule() {
         // Test per un programma DSL con una singola regola
         String input = """
-                if applies { 
-                    see distance < 5 and color is RED and speed > 2 
-                } do { 
-                    ROTATE 
-                } with importance { 
-                    100 
-                } 
-                ;    
-                                
-                                
-                if applies { 
-                    see distance < 5 and color is RED and speed > 2 
-                } do { 
-                    ROTATE 
-                } with importance { 
-                    100 
-                } 
-                ;               
+                if applies {
+                    see distance < 5 and color is RED and speed > 2
+                } do {
+                    ROTATE
+                } with importance {
+                    100
+                }
+                ;
+                
+                
+                if applies {
+                    see distance < 5 and color is RED and speed > 2
+                } do {
+                    ROTATE
+                } with importance {
+                    100
+                }
+                ;
                 """;
 
         // Crea lo stream di input
         CharStream charStream = CharStreams.fromString(input);
 
-        CollectingErrorListener errorListener = new CollectingErrorListener();
+        CollectingErrorListener errorTokensListener = new CollectingErrorListener("tokens");
+        CollectingErrorListener errorParserListener = new CollectingErrorListener("parser");
         // Crea il lexer
         WeightedRulesPlLexer lexer = new WeightedRulesPlLexer(charStream);
         // Aggiungi il mio listener degli errori
         lexer.removeErrorListeners();
-        lexer.addErrorListener(errorListener);
+        lexer.addErrorListener(errorTokensListener);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         // Crea il parser
         WeightedRulesPlParser parser = new WeightedRulesPlParser(tokens);
         // Aggiungi il mio listener degli errori
         parser.removeErrorListeners();
-        parser.addErrorListener(errorListener);
+        parser.addErrorListener(errorParserListener);
         // Avvia il parsing a partire dalla produzione 'program'
         ParseTree tree = parser.program();
 
@@ -67,11 +68,9 @@ public class WeightedRulesPlParserTest {
         // Verifica che il programma contenga esattamente una decision rule
         WeightedRulesPlParser.ProgramContext programContext = parser.program();
 
-        WeightedRulesPlParser.DecisionRuleContext pippo = parser.decisionRule();
-
 
         // Dopo il parsing, recupera gli errori
-        List<String> errors = errorListener.getErrorMessages();
+        List<String> errors = errorParserListener.getErrorMessages();
         if (!errors.isEmpty()) {
             System.out.println("Errori di parsing:");
             for (String error : errors) {
@@ -86,9 +85,6 @@ public class WeightedRulesPlParserTest {
         for (Token t : tokens.getTokens()) {
             System.out.println("Token: " + t.getText() + " - " + WeightedRulesPlLexer.VOCABULARY.getSymbolicName(t.getType()));
         }
-
-
-
 
         List<WeightedRulesPlParser.DecisionRuleContext> decisionRules = new ArrayList<>();
         for (int i = 0; i < programContext.getChildCount(); i++) {

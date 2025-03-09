@@ -1,11 +1,10 @@
 package org.dracosoft.weightedrulepl;
 
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.dracosoft.weightedrulespl.parser.WeightedRulesPlParser;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.antlr.v4.runtime.tree.ParseTree;
-
-import org.dracosoft.weightedrulespl.parser.WeightedRulesPlLexer;
-import org.dracosoft.weightedrulespl.parser.WeightedRulesPlParser;
 
 public class DecisionRuleCollector {
 
