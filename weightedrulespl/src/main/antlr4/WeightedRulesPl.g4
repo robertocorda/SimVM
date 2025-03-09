@@ -3,7 +3,7 @@ grammar WeightedRulesPl;
     package org.dracosoft.weightedrulespl.parser;
 }
 
-program         : decisionRule EOF;
+program         : (decisionRule SEMI)* EOF ;
 
 decisionRule    : ifClause doClause withImportanceClause ;
 
@@ -11,7 +11,7 @@ ifClause        : IF_APPLIES LBRACE conditionExpr RBRACE ;
 doClause        : DO LBRACE commandExpr RBRACE ;
 withImportanceClause : WITH_IMPORTANCE LBRACE importanceExpr RBRACE ;
 
-conditionExpr   : IF inputType condition (AND condition)* ;
+conditionExpr   : inputType condition (AND condition)* ;
 inputType       : SEE | MEM ;
 condition       : field conditionOp value ;
 field           : DISTANCE 

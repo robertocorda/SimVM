@@ -1,16 +1,18 @@
 package org.dracosoft.weightedrulepl;
 
-import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.dracosoft.weightedrulespl.parser.WeightedRulesPlLexer;
 import org.dracosoft.weightedrulespl.parser.WeightedRulesPlParser;
 import org.junit.jupiter.api.Test;
 
-import org.dracosoft.weightedrulespl.parser.WeightedRulesPlLexer;
-
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 public class WeightedRulesPlParserTest {
@@ -18,19 +20,27 @@ public class WeightedRulesPlParserTest {
     @Test
     public void testParseSingleRule() {
         // Test per un programma DSL con una singola regola
-        String input2 = """
+        String input = """
                 if applies { 
-                    if see distance < 5 and color is RED and speed > 2 
+                    see distance < 5 and color is RED and speed > 2 
                 } do { 
                     ROTATE 
                 } with importance { 
                     100 
                 } 
-                end
+                ;    
+                
+                
+                if applies { 
+                    see distance < 5 and color is RED and speed > 2 
+                } do { 
+                    ROTATE 
+                } with importance { 
+                    100 
+                } 
+                ;               
                 """;
-        String input =
-                "if applies { if see distance < 5 and color is RED and speed > 2 }"+
-                " do { ROTATE } with importance { 100 } end";
+
         // Crea lo stream di input
         CharStream charStream = CharStreams.fromString(input);
 
@@ -51,7 +61,7 @@ public class WeightedRulesPlParserTest {
 
         // Verifica che l'albero non sia null
         assertNotNull(tree, "L'albero di parsing non dovrebbe essere null.");
-        System.out.println(tree.toStringTree());
+        //System.out.println(tree.toStringTree());
 
         // Verifica che il programma contenga esattamente una decision rule
         WeightedRulesPlParser.ProgramContext programContext = parser.program();
@@ -68,28 +78,29 @@ public class WeightedRulesPlParserTest {
             System.out.println("Parsing completato senza errori.");
         }
 
+        /*
         tokens.fill();
         for (Token t : tokens.getTokens()) {
             System.out.println("Token: " + t.getText() + " - " + WeightedRulesPlLexer.VOCABULARY.getSymbolicName(t.getType()));
         }
 
-        //assertEquals(1, programContext.decisionRule(),
-       //         "Ci si aspetta esattamente una decisionRule nel programma.");
+         */
 
 
-
-
+        System.out.println(programContext.decisionRule().toString());
+        assertEquals(1, programContext.decisionRule().size(),
+                "Ci si aspetta esattamente una decisionRule nel programma.");
     }
 
-    //@Test
+    @Test
     public void testParseMultipleRules() {
         // Test per un programma DSL con due regole separate da una riga vuota
         String input = """
-                if applies { if see object with distance < 5 and color is RED and speed > 2 } \
-                do { ROTATE } with importance { 100 }\
+                if applies { if see distance < 5 and color is RED and speed > 2 }
+                do { ROTATE } with importance { 100 };
 
-                if applies { if see object with distance > 10 and color is BLUE and speed < 3 } \
-                do { PUSH } with importance { 50 }""";
+                if applies { if see distance > 10 and color is BLUE and speed < 3 }
+                do { PUSH } with importance { 50 };""";
         CharStream charStream = CharStreams.fromString(input);
         WeightedRulesPlLexer lexer = new WeightedRulesPlLexer(charStream);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -97,8 +108,8 @@ public class WeightedRulesPlParserTest {
         WeightedRulesPlParser.ProgramContext programContext = parser.program();
 
         // Verifica che il programma contenga esattamente due decision rule
-        //assertEquals(2, programContext.decisionRule().size(),
-        //        "Ci si aspetta esattamente due decisionRules nel programma.");
+        assertEquals(2, programContext.decisionRule().size(),
+                "Ci si aspetta esattamente due decisionRules nel programma.");
     }
 }
 
