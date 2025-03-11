@@ -1,4 +1,4 @@
-package org.dracosoft;
+package org.dracosoft.antlrdsl;
 
 import org.dracosoft.simbioma.dsl.antlrdsl.AntlrDecisionRuleParser;
 import org.dracosoft.simbioma.model.BiomaCommand;
