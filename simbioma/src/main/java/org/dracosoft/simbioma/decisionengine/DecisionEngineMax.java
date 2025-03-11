@@ -1,8 +1,14 @@
-package org.dracosoft.simbioma;
+package org.dracosoft.simbioma.decisionengine;
+
+import org.dracosoft.simbioma.model.DecisionRule;
+import org.dracosoft.simbioma.model.Bioma;
+import org.dracosoft.simbioma.model.BiomaIntent;
+import org.dracosoft.simbioma.model.DecisionEngineBase;
+import org.dracosoft.simbioma.model.SenseData;
 
 import java.util.List;
 
-import static org.dracosoft.simbioma.BiomaCommand.*;
+import static org.dracosoft.simbioma.model.BiomaCommand.*;
 
 public class DecisionEngineMax extends DecisionEngineBase {
 

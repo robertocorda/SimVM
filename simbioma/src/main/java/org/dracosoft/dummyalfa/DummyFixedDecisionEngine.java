@@ -1,6 +1,7 @@
 package org.dracosoft.dummyalfa;
 
-import org.dracosoft.simbioma.*;
+import org.dracosoft.simbioma.decisionengine.DecisionEngineRandom;
+import org.dracosoft.simbioma.model.*;
 
 import java.util.List;
 

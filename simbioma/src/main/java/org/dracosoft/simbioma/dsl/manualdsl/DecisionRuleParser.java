@@ -1,4 +1,4 @@
-package org.dracosoft.simbioma.dsl;
+package org.dracosoft.simbioma.dsl.manualdsl;
 
 /**
  * Parser DSL per decision rules.
@@ -9,9 +9,9 @@ package org.dracosoft.simbioma.dsl;
  *
  * L'implementazione qui mostrata è semplificata e assume che la sintassi sia esattamente quella attesa.
  */
-import org.dracosoft.simbioma.BiomaCommand;
-import org.dracosoft.simbioma.DecisionRule;
-import org.dracosoft.simbioma.SenseData;
+import org.dracosoft.simbioma.model.BiomaCommand;
+import org.dracosoft.simbioma.model.DecisionRule;
+import org.dracosoft.simbioma.model.SenseData;
 
 import java.util.ArrayList;
 import java.util.List;

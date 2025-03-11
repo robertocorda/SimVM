@@ -1,12 +1,12 @@
-package org.dracosoft.interpreter;
-
+package org.dracosoft.simbioma.dsl.antlrdsl;
 
 import org.dracosoft.simbioma.model.SenseData;
-import org.dracosoft.weightedrulespl.parser.WeightedRulesPlParser;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import org.dracosoft.weightedrulespl.parser.WeightedRulesPlParser;
+
 
 public class ConditionInterpreter {
 
@@ -16,15 +16,14 @@ public class ConditionInterpreter {
      */
     public static Predicate<SenseData> parseConditionExpr(WeightedRulesPlParser.ConditionExprContext exprCtx) {
         // 1) Leggiamo inputType (SEE o MEM), potremmo usarlo o ignorarlo
-        WeightedRulesPlParser.InputTypeContext inputTypeCtx = exprCtx.inputType();
+        org.dracosoft.weightedrulespl.parser.WeightedRulesPlParser.InputTypeContext inputTypeCtx = exprCtx.inputType();
         String inputType = (inputTypeCtx != null)? inputTypeCtx.getText().toLowerCase() : "see";
-        // TODO Se vuoi interpretare diversamente se "see" o "mem", puoi farlo qui.
+        // Se vuoi interpretare diversamente se "see" o "mem", puoi farlo qui.
 
         // 2) condition (AND condition)* => cond principale + zero o più cond secondarie
         List<WeightedRulesPlParser.ConditionContext> condList = new ArrayList<>();
 
         // condition() ti restituisce la prima condition
-        // TODO get first
         WeightedRulesPlParser.ConditionContext firstCond = exprCtx.condition().getFirst();
         if (firstCond != null) {
             condList.add(firstCond);
@@ -106,14 +105,15 @@ public class ConditionInterpreter {
      * Confronta due int in base all'operatore (<, >, <=, >=, ==, is).
      */
     private static boolean compareInt(int actual, String operator, int expected) {
-        return switch (operator) {
-            case "<" -> actual < expected;
-            case ">" -> actual > expected;
-            case "<=" -> actual <= expected;
-            case ">=" -> actual >= expected;
-            case "==", "is" -> actual == expected;
-            default -> false;
-        };
+        switch (operator) {
+            case "<":  return actual <  expected;
+            case ">":  return actual >  expected;
+            case "<=": return actual <= expected;
+            case ">=": return actual >= expected;
+            case "==":
+            case "is": return actual == expected;
+            default:   return false;
+        }
     }
 
     /**

@@ -1,6 +1,6 @@
 package org.dracosoft.dummyalfa;
 
-import org.dracosoft.simbioma.*;
+import org.dracosoft.simbioma.model.*;
 
 import java.awt.*;
 import java.util.HashMap;

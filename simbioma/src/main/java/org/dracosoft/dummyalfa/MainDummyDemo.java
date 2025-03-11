@@ -1,7 +1,7 @@
 package org.dracosoft.dummyalfa;
 
-import org.dracosoft.simbioma.BiomaIntent;
-import org.dracosoft.simbioma.SenseData;
+import org.dracosoft.simbioma.model.BiomaIntent;
+import org.dracosoft.simbioma.model.SenseData;
 
 public class MainDummyDemo {
     public static void main(String[] args) {

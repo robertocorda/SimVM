@@ -1,8 +1,8 @@
 package org.dracosoft.dummyalfa;
 
-import org.dracosoft.simbioma.BiomaCommand;
-import org.dracosoft.simbioma.DecisionRule;
-import org.dracosoft.simbioma.SenseData;
+import org.dracosoft.simbioma.model.BiomaCommand;
+import org.dracosoft.simbioma.model.DecisionRule;
+import org.dracosoft.simbioma.model.SenseData;
 
 public class PushRule extends DecisionRule {
     private final int weight; // es. 60

@@ -1,10 +1,10 @@
 package org.dracosoft.dummyalfa;
 
-import org.dracosoft.simbioma.BiomaCommand;
-import org.dracosoft.simbioma.DecisionRule;
-import org.dracosoft.simbioma.SenseData;
+import org.dracosoft.simbioma.model.BiomaCommand;
+import org.dracosoft.simbioma.model.DecisionRule;
+import org.dracosoft.simbioma.model.SenseData;
 
-import static org.dracosoft.simbioma.BiomaCommand.*;
+import static org.dracosoft.simbioma.model.BiomaCommand.*;
 
 public class RotateRule extends DecisionRule {
     private final int weight; // es. 80

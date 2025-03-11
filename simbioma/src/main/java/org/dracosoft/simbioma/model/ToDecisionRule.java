@@ -1,6 +1,4 @@
-package org.dracosoft.simbioma.dsl;
-
-import org.dracosoft.simbioma.DecisionRule;
+package org.dracosoft.simbioma.model;
 
 import java.util.List;
 

@@ -1,13 +1,13 @@
-package org.dracosoft.simbioma.dsl;
+package org.dracosoft.simbioma.dsl.antlrdsl;
 
 
 
 //package org.dracosoft.weightedrulespl;
 
-import org.dracosoft.simbioma.BiomaCommand;
-import org.dracosoft.simbioma.DecisionRule;
-import org.dracosoft.simbioma.SenseData;
-import org.dracosoft.weightedrulespl.parser.WeightedRulesPlParser;
+import org.dracosoft.simbioma.model.BiomaCommand;
+import org.dracosoft.simbioma.model.DecisionRule;
+import org.dracosoft.simbioma.model.SenseData;
+
 import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
 
@@ -61,9 +61,6 @@ public class AntlrDecisionRule extends DecisionRule {
         return "(Rule: " + getName() +
                 ", Command: " + getCommand() + ")";
     }
-
-
-
 
 }
 

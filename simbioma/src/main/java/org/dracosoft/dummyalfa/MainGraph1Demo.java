@@ -1,8 +1,12 @@
 package org.dracosoft.dummyalfa;
 
-import org.dracosoft.simbioma.*;
-import org.dracosoft.simbioma.dsl.AntlrDecisionRuleParser;
-import org.dracosoft.simbioma.dsl.ManualDecisionRuleParser;
+import org.dracosoft.simbioma.decisionengine.DecisionEngineMax;
+import org.dracosoft.simbioma.dsl.antlrdsl.AntlrDecisionRuleParser;
+import org.dracosoft.simbioma.dsl.manualdsl.ManualDecisionRuleParser;
+import org.dracosoft.simbioma.model.BiomaIntent;
+import org.dracosoft.simbioma.model.DecisionEngine;
+import org.dracosoft.simbioma.model.DecisionRule;
+import org.dracosoft.simbioma.model.SenseData;
 
 import java.util.List;
 

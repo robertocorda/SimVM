@@ -1,4 +1,8 @@
-package org.dracosoft.simbioma;
+package org.dracosoft.simbioma.decisionengine;
+
+import org.dracosoft.simbioma.model.DecisionRule;
+import org.dracosoft.simbioma.model.DefaultRule;
+import org.dracosoft.simbioma.model.*;
 
 import java.util.ArrayList;
 import java.util.List;

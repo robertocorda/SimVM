@@ -1,4 +1,4 @@
-package org.dracosoft.simbioma.dsl;
+package org.dracosoft.simbioma.dsl.manualdsl;
 
 /*
   Implementazione base della DecisionRule basata sul DSL.
@@ -10,9 +10,9 @@ package org.dracosoft.simbioma.dsl;
   Poiché il peso deve essere calcolato in base ai dati sensoriali, la funzione
   di calcolo restituisce un intero che verrà poi normalizzato in [1,100].
  */
-import org.dracosoft.simbioma.BiomaCommand;
-import org.dracosoft.simbioma.DecisionRule;
-import org.dracosoft.simbioma.SenseData;
+import org.dracosoft.simbioma.model.BiomaCommand;
+import org.dracosoft.simbioma.model.DecisionRule;
+import org.dracosoft.simbioma.model.SenseData;
 
 
 import java.util.function.Predicate;

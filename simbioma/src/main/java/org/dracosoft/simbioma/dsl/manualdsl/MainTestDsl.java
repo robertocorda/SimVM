@@ -1,7 +1,7 @@
-package org.dracosoft.simbioma.dsl;
+package org.dracosoft.simbioma.dsl.manualdsl;
 
-import org.dracosoft.simbioma.DecisionRule;
-import org.dracosoft.simbioma.SenseData;
+import org.dracosoft.simbioma.model.DecisionRule;
+import org.dracosoft.simbioma.model.SenseData;
 
 import java.util.List;
 

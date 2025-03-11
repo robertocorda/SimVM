@@ -1,12 +1,11 @@
 package org.dracosoft.dummyalfa;
 
-import org.dracosoft.simbioma.*;
+import org.dracosoft.simbioma.model.Bioma;
+import org.dracosoft.simbioma.model.BiomaIntent;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Implementazione grafica di EnvironmentIO.

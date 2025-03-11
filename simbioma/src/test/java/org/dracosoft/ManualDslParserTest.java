@@ -1,17 +1,17 @@
 package org.dracosoft;
 
-import org.dracosoft.simbioma.BiomaCommand;
-import org.dracosoft.simbioma.DecisionRule;
-import org.dracosoft.simbioma.SenseData;
-import org.dracosoft.simbioma.dsl.DslDecisionRule;
-import org.dracosoft.simbioma.dsl.ManualDecisionRuleParser;
+import org.dracosoft.simbioma.model.BiomaCommand;
+import org.dracosoft.simbioma.model.DecisionRule;
+import org.dracosoft.simbioma.model.SenseData;
+import org.dracosoft.simbioma.dsl.manualdsl.DslDecisionRule;
+import org.dracosoft.simbioma.dsl.manualdsl.ManualDecisionRuleParser;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DSLParserTest {
+public class ManualDslParserTest {
 
     /**
      * Testa il parsing e l'applicazione di una regola che prevede ROTATE.

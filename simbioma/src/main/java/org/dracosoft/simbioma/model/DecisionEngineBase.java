@@ -1,4 +1,4 @@
-package org.dracosoft.simbioma;
+package org.dracosoft.simbioma.model;
 
 import java.util.List;
 

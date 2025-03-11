@@ -1,10 +1,10 @@
 package org.dracosoft.dummyalfa;
 
 import org.dracosoft.dslprogram.RandomDSLProgramGenerator;
-import org.dracosoft.simbioma.DecisionRule;
-import org.dracosoft.simbioma.SenseData;
-import org.dracosoft.simbioma.dsl.DslDecisionRule;
-import org.dracosoft.simbioma.dsl.ManualDecisionRuleParser;
+import org.dracosoft.simbioma.model.DecisionRule;
+import org.dracosoft.simbioma.model.SenseData;
+import org.dracosoft.simbioma.dsl.manualdsl.DslDecisionRule;
+import org.dracosoft.simbioma.dsl.manualdsl.ManualDecisionRuleParser;
 
 import java.util.List;
 

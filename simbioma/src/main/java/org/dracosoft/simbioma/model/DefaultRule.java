@@ -1,6 +1,6 @@
-package org.dracosoft.simbioma;
+package org.dracosoft.simbioma.model;
 
-import static org.dracosoft.simbioma.BiomaCommand.*;
+import static org.dracosoft.simbioma.model.BiomaCommand.*;
 
 public class DefaultRule extends DecisionRule {
 

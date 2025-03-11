@@ -1,4 +1,4 @@
-package org.dracosoft.simbioma;
+package org.dracosoft.simbioma.model;
 
 public class SenseData {
     private final int distance;
