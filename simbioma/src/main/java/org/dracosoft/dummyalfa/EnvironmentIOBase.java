@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static org.dracosoft.simbioma.model.SenseDataFactory.*;
+
 
 public abstract class EnvironmentIOBase implements EnvironmentIO {
 
@@ -43,7 +45,7 @@ public abstract class EnvironmentIOBase implements EnvironmentIO {
         int distance = RANDOM.nextInt(20) + 1;  // valori da 1 a 20
         int speed = RANDOM.nextInt(10) + 1;       // valori da 1 a 10
         String color = COLORS[RANDOM.nextInt(COLORS.length)];
-        return new SenseData(distance, color, speed);
+        return createSenseData(distance, color, speed);
     }
 
     /*

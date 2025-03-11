@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
 
+import static org.dracosoft.simbioma.model.SenseDataFactory.getDistance;
+
 public class AntlrDecisionRuleParser implements ToDecisionRule {
 
     public AntlrDecisionRuleParser() {
@@ -69,7 +71,7 @@ public class AntlrDecisionRuleParser implements ToDecisionRule {
         String text = ifCtx.conditionExpr().getText();
         // TODO: scrivere un mini interprete per "distance < 5 and color is RED ..."
         // Per brevità, facciamo un example stub che verifica se distance<5
-        return (SenseData data) -> data.getDistance() < 5;
+        return (SenseData data) -> getDistance(data) < 5;
     }
 
     private BiomaCommand parseCommand(WeightedRulesPlParser.DoClauseContext doCtx) {

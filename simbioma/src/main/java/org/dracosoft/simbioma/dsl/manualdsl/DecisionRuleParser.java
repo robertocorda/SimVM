@@ -1,12 +1,10 @@
 package org.dracosoft.simbioma.dsl.manualdsl;
 
-/**
+/*
  * Parser DSL per decision rules.
  * Il DSL accetta regole nella forma:
- *
  * if applies { if see object with distance <5 and color RED and speed >2 };
  * do { ROTATE } with importance { 100 - (distance * 10) + (speed * 2) }
- *
  * L'implementazione qui mostrata è semplificata e assume che la sintassi sia esattamente quella attesa.
  */
 import org.dracosoft.simbioma.model.BiomaCommand;
@@ -17,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
+
+import static org.dracosoft.simbioma.model.EnvConstants.RED;
 
 public class DecisionRuleParser {
 
@@ -59,9 +59,9 @@ public class DecisionRuleParser {
             int doEnd = ruleText.indexOf("}", doStart);
             String commandText = ruleText.substring(doStart + "do {".length(), doEnd).trim();
 
-            int impStart = ruleText.indexOf("with importance {", doEnd);
-            int impEnd = ruleText.indexOf("}", impStart);
-            String importanceText = ruleText.substring(impStart + "with importance {".length(), impEnd).trim();
+            //int impStart = ruleText.indexOf("with importance {", doEnd);
+            //int impEnd = ruleText.indexOf("}", impStart);
+            //String importanceText = ruleText.substring(impStart + "with importance {".length(), impEnd).trim();
 
             // Per il nome della regola, possiamo usare la condizione (o una sua parte)
             String ruleName = "Rule(" + conditionText + ")";
@@ -70,33 +70,25 @@ public class DecisionRuleParser {
             // Esempio: "if see object with distance <5 and color RED and speed >2"
             // In una implementazione reale useremmo un parser espressioni. Qui simuliamo un parser "fisso".
             Predicate<SenseData> condition = data -> {
-                boolean cond1 = data.getDistance() < 5;
-                boolean cond2 = "RED".equalsIgnoreCase(data.getColor());
-                boolean cond3 = data.getSpeed() > 2;
+                boolean cond1 = data.getSenseValue("distance") < 5;
+                boolean cond2 = RED == data.getSenseValue("color");
+                boolean cond3 = data.getSenseValue("speed") > 2;
                 return cond1 && cond2 && cond3;
             };
 
             // Converti il comando: assumiamo che commandText contenga un solo comando (ROTATE, PUSH o STILL)
-            BiomaCommand command;
-            switch (commandText.toUpperCase()) {
-                case "ROTATE":
-                    command = BiomaCommand.ROTATE;
-                    break;
-                case "PUSH":
-                    command = BiomaCommand.PUSH;
-                    break;
-                case "STILL":
-                    command = BiomaCommand.STILL;
-                    break;
-                default:
-                    throw new IllegalArgumentException("Comando non riconosciuto: " + commandText);
-            }
+            BiomaCommand command = switch (commandText.toUpperCase()) {
+                case "ROTATE" -> BiomaCommand.ROTATE;
+                case "PUSH" -> BiomaCommand.PUSH;
+                case "STILL" -> BiomaCommand.STILL;
+                default -> throw new IllegalArgumentException("Comando non riconosciuto: " + commandText);
+            };
 
             // Converti l'importanza in una funzione ToIntFunction<SenseData>.
             // In questo esempio, supponiamo che l'espressione sia "100 - (distance * 10) + (speed * 2)"
             // e sostituiamo "distance" e "speed" con i valori di SenseData.
             ToIntFunction<SenseData> weightFunction = data -> {
-                int raw = 100 - (data.getDistance() * 10) + (data.getSpeed() * 2);
+                int raw = 100 - (data.getSenseValue("distance") * 10) + (data.getSenseValue("speed") * 2);
                 // Normalizza automaticamente in [1,100]
                 if (raw < 1) raw = 1;
                 if (raw > 100) raw = 100;

@@ -1,4 +1,4 @@
-package org.dracosoft.interpreter;
+package org.dracosoft.simbioma.dsl.antlrdsl.interpreter;
 
 
 import org.dracosoft.simbioma.model.SenseData;
@@ -8,7 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import static org.dracosoft.simbioma.model.SenseDataFactory.mapConstantToInt;
+
 public class ConditionInterpreter {
+
+    // TODO generalizzare
+    static int RED = 12345;
+    static int BLUE = 5678;
 
     /**
      * Converte conditionExpr in un Predicate<SenseData>.
@@ -80,19 +86,23 @@ public class ConditionInterpreter {
     private static boolean evaluateCondition(SenseData data, String field, String operator, String valText) {
         switch (field) {
             case "distance": {
-                int actual = data.getDistance();
+                int actual = data.getSenseValue("distance");
                 int expected = parseIntOrZero(valText);
                 return compareInt(actual, operator, expected);
             }
             case "speed": {
-                int actual = data.getSpeed();
+                int actual = data.getSenseValue("speed");
                 int expected = parseIntOrZero(valText);
                 return compareInt(actual, operator, expected);
             }
             case "color": {
+                int actualColor = data.getSenseValue("color");
+
+                int valInt = mapConstantToInt(valText);
+
                 // Se operator == "is" o "==", confronta color ignoring case
                 if (operator.equalsIgnoreCase("is") || operator.equals("==")) {
-                    return data.getColor().equalsIgnoreCase(valText);
+                    return actualColor == valInt;
                 }
                 // Altri operatori non hanno senso -> false
                 return false;
@@ -101,6 +111,8 @@ public class ConditionInterpreter {
                 return false;
         }
     }
+
+
 
     /**
      * Confronta due int in base all'operatore (<, >, <=, >=, ==, is).

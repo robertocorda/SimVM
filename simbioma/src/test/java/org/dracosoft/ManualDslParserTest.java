@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.dracosoft.simbioma.model.SenseDataFactory.createSenseData;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ManualDslParserTest {
@@ -51,7 +52,7 @@ public class ManualDslParserTest {
                 "Il nome della regola dovrebbe contenere la descrizione della condizione.");
 
         // Creiamo un SenseData che soddisfa la condizione: distance=3, color=RED, speed=4.
-        SenseData senseData = new SenseData(3, "RED", 4);
+        SenseData senseData = createSenseData(3, "RED", 4);
         assertTrue(rule.applies(senseData), "La regola deve applicarsi con i dati forniti.");
 
         // Controlliamo il comando: ci aspettiamo ROTATE.
@@ -95,7 +96,7 @@ public class ManualDslParserTest {
 
         DecisionRule rule = rules.getFirst();
         // Creiamo un SenseData che NON soddisfa la condizione (color è RED invece di BLUE)
-        SenseData senseData = new SenseData(8, "RED", 2);
+        SenseData senseData = createSenseData(8, "RED", 2);
         assertFalse(rule.applies(senseData),
                 "La regola non deve applicarsi con i dati forniti (color non è BLUE).");
     }

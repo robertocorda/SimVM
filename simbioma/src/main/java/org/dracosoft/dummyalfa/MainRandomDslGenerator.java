@@ -8,6 +8,8 @@ import org.dracosoft.simbioma.dsl.manualdsl.ManualDecisionRuleParser;
 
 import java.util.List;
 
+import static org.dracosoft.simbioma.model.SenseDataFactory.createSenseData;
+
 public class MainRandomDslGenerator {
 
     public static void main(String[] args) {
@@ -21,7 +23,7 @@ public class MainRandomDslGenerator {
 
 
             // Creiamo un SenseData che soddisfa la condizione: distance=3, color=RED, speed=4.
-            SenseData senseData = new SenseData(3, "RED", 4);
+            SenseData senseData =createSenseData(3, "RED", 4);
             boolean applies = rule.applies(senseData);
 
 

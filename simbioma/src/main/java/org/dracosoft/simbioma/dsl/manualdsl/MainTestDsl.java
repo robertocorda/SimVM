@@ -2,6 +2,7 @@ package org.dracosoft.simbioma.dsl.manualdsl;
 
 import org.dracosoft.simbioma.model.DecisionRule;
 import org.dracosoft.simbioma.model.SenseData;
+import org.dracosoft.simbioma.model.SenseDataFactory;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class MainTestDsl {
 
         // Creiamo un esempio di dati sensoriali:
         // Ad esempio: distanza 3, colore RED, velocità 4
-        SenseData sampleSense = new SenseData(3, "RED", 4);
+        SenseData sampleSense = SenseDataFactory.createSenseData(3, "RED", 4);
         System.out.println("\nTesting with SenseData: " + sampleSense);
 
         // Valutiamo ciascuna regola sui dati di test

@@ -5,6 +5,9 @@ import org.dracosoft.simbioma.model.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.dracosoft.simbioma.model.EnvConstants.RED;
+import static org.dracosoft.simbioma.model.SenseDataFactory.createSenseData;
+
 public class DummyEnvironmentIO implements EnvironmentIO {
 
     // Mappa di posizioni: per ogni Bioma, memorizzo coordinate x,y
@@ -41,7 +44,7 @@ public class DummyEnvironmentIO implements EnvironmentIO {
         // Esempio dummy: restituiamo un oggetto "RED" a distanza 3, velocità 2
         // In un caso più avanzato, potresti guardare i reali "oggetti" intorno
         // e calcolare la distanza rispetto alla pos. del bioma.
-        return new SenseData(3, "RED", 2);
+        return createSenseData(3, RED, 2);
     }
 
     @Override

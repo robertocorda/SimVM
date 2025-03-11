@@ -12,6 +12,8 @@ import java.util.function.ToIntFunction;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
+import static org.dracosoft.simbioma.model.SenseDataFactory.*;
+
 /**
  * Parser generalizzato per il DSL decisionale.
  */
@@ -110,7 +112,7 @@ public class ManualDecisionRuleParser implements ToDecisionRule {
                 String key = tokens[0].toLowerCase();
                 String value = tokens[1];
                 if (key.equals("color")) {
-                    predicates.add(data -> data.getColor().equalsIgnoreCase(value));
+                    predicates.add(data -> compareColor(data, value));
                 } else {
                     throw new IllegalArgumentException("Condizione sconosciuta: " + part);
                 }
@@ -125,7 +127,7 @@ public class ManualDecisionRuleParser implements ToDecisionRule {
                 if (key.equals("color")) {
                     // Supporta la forma "color is RED"
                     if (operator.equalsIgnoreCase("is")) {
-                        predicates.add(data -> data.getColor().equalsIgnoreCase(value));
+                        predicates.add(data -> compareColor(data, value));
                     } else {
                         throw new IllegalArgumentException("Operatore non supportato per 'color': " + operator);
                     }
@@ -134,37 +136,37 @@ public class ManualDecisionRuleParser implements ToDecisionRule {
                     switch (operator) {
                         case "<":
                             if (key.equals("distance")) {
-                                predicates.add(data -> data.getDistance() < num);
+                                predicates.add(data -> getDistance(data) < num);
                             } else {
-                                predicates.add(data -> data.getSpeed() < num);
+                                predicates.add(data -> getSpeed(data) < num);
                             }
                             break;
                         case ">":
                             if (key.equals("distance")) {
-                                predicates.add(data -> data.getDistance() > num);
+                                predicates.add(data -> getDistance(data) > num);
                             } else {
-                                predicates.add(data -> data.getSpeed() > num);
+                                predicates.add(data -> getSpeed(data) > num);
                             }
                             break;
                         case "<=":
                             if (key.equals("distance")) {
-                                predicates.add(data -> data.getDistance() <= num);
+                                predicates.add(data -> getDistance(data) <= num);
                             } else {
-                                predicates.add(data -> data.getSpeed() <= num);
+                                predicates.add(data -> getSpeed(data) <= num);
                             }
                             break;
                         case ">=":
                             if (key.equals("distance")) {
-                                predicates.add(data -> data.getDistance() >= num);
+                                predicates.add(data -> getDistance(data) >= num);
                             } else {
-                                predicates.add(data -> data.getSpeed() >= num);
+                                predicates.add(data -> getSpeed(data) >= num);
                             }
                             break;
                         case "==":
                             if (key.equals("distance")) {
-                                predicates.add(data -> data.getDistance() == num);
+                                predicates.add(data -> getDistance(data) == num);
                             } else {
-                                predicates.add(data -> data.getSpeed() == num);
+                                predicates.add(data -> getSpeed(data) == num);
                             }
                             break;
                         default:
@@ -181,6 +183,8 @@ public class ManualDecisionRuleParser implements ToDecisionRule {
         // Combina tutte le condizioni con AND logico
         return predicates.stream().reduce(x -> true, Predicate::and);
     }
+
+
 
 
     /**
@@ -203,8 +207,8 @@ public class ManualDecisionRuleParser implements ToDecisionRule {
             return data -> {
                 try {
                     ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
-                    engine.put("distance", data.getDistance());
-                    engine.put("speed", data.getSpeed());
+                    engine.put("distance", getDistance(data));
+                    engine.put("speed", getSpeed(data));
                     // Se necessario, si potrebbe anche passare "color" o altri parametri.
                     Object result = engine.eval(finalImportanceText);
                     int intResult = ((Number) result).intValue();

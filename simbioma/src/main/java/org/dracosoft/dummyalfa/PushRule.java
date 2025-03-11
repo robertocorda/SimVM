@@ -4,6 +4,9 @@ import org.dracosoft.simbioma.model.BiomaCommand;
 import org.dracosoft.simbioma.model.DecisionRule;
 import org.dracosoft.simbioma.model.SenseData;
 
+import static org.dracosoft.simbioma.model.SenseDataFactory.compareColor;
+import static org.dracosoft.simbioma.model.SenseDataFactory.getDistance;
+
 public class PushRule extends DecisionRule {
     private final int weight; // es. 60
 
@@ -18,7 +21,7 @@ public class PushRule extends DecisionRule {
 
     @Override
     public boolean applies(SenseData data) {
-        return data.getDistance() < 5 && "RED".equalsIgnoreCase(data.getColor());
+        return getDistance(data) < 5 && compareColor(data, "RED");
     }
 
     @Override
