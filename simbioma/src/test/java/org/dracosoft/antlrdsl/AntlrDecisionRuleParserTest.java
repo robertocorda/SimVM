@@ -40,18 +40,18 @@ public class AntlrDecisionRuleParserTest {
         assertNotNull(rule.getName(), "Il nome della regola non dovrebbe essere null.");
 
         // see distance < 5 and color is RED
-        testRule(rule, 3, "RED", 12, true);
-        testRule(rule, 5, "RED", 12, false);
-        testRule(rule, 6, "RED", 12, false);
+        testRuleApplies(rule, 3, "RED", 12, true);
+        testRuleApplies(rule, 5, "RED", 12, false);
+        testRuleApplies(rule, 6, "RED", 12, false);
 
-        testRule(rule, 3, "BLUE", 12, false);
-        testRule(rule, 3, "BLUE", 12, false);
-        testRule(rule, 3, "BLUE", 12, false);
+        testRuleApplies(rule, 3, "BLUE", 12, false);
+        testRuleApplies(rule, 3, "BLUE", 12, false);
+        testRuleApplies(rule, 3, "BLUE", 12, false);
 
 
     }
 
-    private static void testRule(DecisionRule rule, int distance, String color, int speed, boolean expectedApply) {
+    private static void testRuleApplies(DecisionRule rule, int distance, String color, int speed, boolean expectedApply) {
         boolean actualApply = rule.applies(createSenseData(distance, color, speed));
         assertEquals(expectedApply,actualApply );
     }
