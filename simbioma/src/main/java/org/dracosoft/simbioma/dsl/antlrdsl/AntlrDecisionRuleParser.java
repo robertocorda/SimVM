@@ -1,5 +1,6 @@
 package org.dracosoft.simbioma.dsl.antlrdsl;
 
+import org.dracosoft.simbioma.dsl.antlrdsl.interpreter.ConditionInterpreter;
 import org.dracosoft.simbioma.model.BiomaCommand;
 import org.dracosoft.simbioma.model.DecisionRule;
 import org.dracosoft.simbioma.model.SenseData;
@@ -65,13 +66,14 @@ public class AntlrDecisionRuleParser implements ToDecisionRule {
 
     // --------------- Metodi di parsing dei sotto-contesti -------------------
     private Predicate<SenseData> parseCondition(WeightedRulesPlParser.IfClauseContext ifCtx) {
-        // Se la tua grammatica definisce in ifCtx un 'conditionExpr',
-        // puoi estrarne i campi, oppure prendere la stringa e interpretarla.
+
         // Esempio minimalista (stub):
-        String text = ifCtx.conditionExpr().getText();
-        // TODO: scrivere un mini interprete per "distance < 5 and color is RED ..."
-        // Per brevità, facciamo un example stub che verifica se distance<5
-        return (SenseData data) -> getDistance(data) < 5;
+        //String text = ifCtx.conditionExpr().getText();
+        //return (SenseData data) -> getDistance(data) < 5;
+
+        // WARN mini interprete per "distance < 5 and color is RED ..."
+        Predicate<SenseData> cond = ConditionInterpreter.parseConditionExpr(ifCtx.conditionExpr());
+        return cond;
     }
 
     private BiomaCommand parseCommand(WeightedRulesPlParser.DoClauseContext doCtx) {
