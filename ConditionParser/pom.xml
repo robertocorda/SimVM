@@ -1,15 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.dracosoft</groupId>
+        <artifactId>simula</artifactId>
+        <version>0.2.0-SNAPSHOT</version>
+    </parent>
 
-    <groupId>org.dracosoft.weightedrulepl</groupId>
-    <artifactId>weightedrulespl</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <artifactId>ConditionParser</artifactId>
     <packaging>jar</packaging>
 
-    <name>weightedrulespl</name>
+    <name>ConditionParser</name>
     <url>http://maven.apache.org</url>
-
     <properties>
         <antlr4.version>4.13.2</antlr4.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

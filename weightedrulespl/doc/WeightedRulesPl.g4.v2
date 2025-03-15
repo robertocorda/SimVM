@@ -1,0 +1,98 @@
+// version 0.2
+// 2025-03
+// BUGGED
+
+grammar WeightedRulesPl;
+@header {
+    package org.dracosoft.weightedrulespl.parser;
+}
+
+program         : (decisionRule SEMI)* EOF ;
+
+decisionRule    : ifClause doClause withImportanceClause ;
+
+ifClause        : IF_APPLIES LBRACE conditionExpr RBRACE ;
+doClause        : DO LBRACE commandExpr RBRACE ;
+withImportanceClause : WITH_IMPORTANCE LBRACE importanceExpr RBRACE ;
+
+conditionExpr   : condition (AND condition)* ;
+condition       : (NOT)? singleCondition;
+singleCondition : expr conditionOp expr;
+
+conditionOp
+    : LT
+    | GT
+    | LE
+    | GE
+    | EQ
+    | IS
+    ;
+value           : NUMBER
+                | CONSTANT ;
+
+commandExpr     : COMMAND ;
+
+importanceExpr  : expr ;
+
+expr            : expr opMulDiv expr                 // es: expr * expr
+                | expr opAddSub expr                 // es: expr + expr
+                | LPAR expr RPAR                     // parentesi
+                | DEFAULT_FIELD                      // un singolo literal (field, costante, stored, etc.)
+                | NUMBER
+                | CONSTANT
+                | STORED
+    ;
+
+
+// operatori aritmetici
+opMulDiv : '*' | '/' ;
+opAddSub : '+' | '-' ;
+
+// Field -> distance, speed, color (se li vuoi come campi "built-in" col DSL)
+DEFAULT_FIELD
+    : DISTANCE
+    | SPEED
+    | COLOR
+    ;
+
+IF_APPLIES      : 'if applies' ;
+DO              : 'do' ;
+WITH_IMPORTANCE : 'with importance' ;
+IF              : 'if' ;
+MEM             : 'memory' ;
+
+SEMI            : ';' ;
+LBRACE          : '{' ;
+RBRACE          : '}' ;
+LPAR            : '(' ;
+RPAR            : ')' ;
+
+DISTANCE        : 'distance' ;
+COLOR           : 'color' ;
+SPEED           : 'speed' ;
+
+
+
+LT              : '<' ;
+GT              : '>' ;
+LE              : '<=' ;
+GE              : '>=' ;
+EQ              : '==' ;
+IS              : 'is' ;
+AND             : 'and' ;
+NOT             : 'not' ;
+
+
+
+SENSE           : 'sense' ;
+
+
+
+COMMAND         : 'ROTATE' | 'PUSH' | 'STILL' ;
+
+NUMBER          : [0-9]+ ;
+CONSTANT        : [A-Z0-9]+ ;
+LOWER_LITERAL   : [a-z] [a-z0-9_]* ;
+STORED          : '${' LOWER_LITERAL '}' ;
+
+WS              : [ \t\r\n]+ -> skip ;

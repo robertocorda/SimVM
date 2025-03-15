@@ -17,6 +17,7 @@
         <module>simbioma</module>
         <module>simvm</module>
         <module>weightedrulespl</module>
+        <module>ConditionParser</module>
     </modules>
 
     <packaging>pom</packaging>
