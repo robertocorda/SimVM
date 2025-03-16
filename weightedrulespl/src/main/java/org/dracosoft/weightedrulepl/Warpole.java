@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.dracosoft.parserutils.CollectingErrorListener;
 import org.dracosoft.weightedrulespl.parser.WeightedRulesPlLexer;
 import org.dracosoft.weightedrulespl.parser.WeightedRulesPlParser;
 

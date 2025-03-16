@@ -1,13 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.dracosoft</groupId>
+        <artifactId>simula</artifactId>
+        <version>0.2.0-SNAPSHOT</version>
+    </parent>
 
-    <groupId>org.dracosoft.weightedrulepl</groupId>
-    <artifactId>weightedrulespl</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <artifactId>MicroFunctLang</artifactId>
     <packaging>jar</packaging>
 
-    <name>weightedrulespl</name>
+    <name>MicroLang</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -42,18 +45,9 @@
         </dependency>
     </dependencies>
 
-    <!-- former
+    <!--
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <release>17</release>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr4-maven-plugin</artifactId>
@@ -72,7 +66,7 @@
                             <arguments>
                                 <argument>-visitor</argument>
                             </arguments>
-                            <sourceDirectory>main/antlr/WeightedRulesPl.g4</sourceDirectory>
+                            <sourceDirectory>main/antlr/MicroFunctLang.gp4</sourceDirectory>
                             <outputDirectory>${project.build.directory}/generated-sources/antlr4</outputDirectory>
                         </configuration>
                     </execution>
@@ -100,8 +94,7 @@
 
         </plugins>
     </build>
--->
-
+    -->
     <build>
         <plugins>
             <!-- Plugin ANTLR -->
@@ -158,5 +151,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

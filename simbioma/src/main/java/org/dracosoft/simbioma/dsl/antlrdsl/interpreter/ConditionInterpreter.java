@@ -31,7 +31,7 @@ public class ConditionInterpreter {
 
         // condition() ti restituisce la prima condition
         // TODO get first
-        WeightedRulesPlParser.ConditionContext firstCond = exprCtx.condition().getFirst();
+        WeightedRulesPlParser.ConditionContext firstCond = exprCtx.condition().get(0);
         if (firstCond != null) {
             condList.add(firstCond);
         }

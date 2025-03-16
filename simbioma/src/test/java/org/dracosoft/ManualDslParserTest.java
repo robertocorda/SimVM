@@ -46,7 +46,7 @@ public class ManualDslParserTest {
         assertNotNull(rules, "La lista di regole non deve essere null.");
         assertEquals(1, rules.size(), "Ci si aspetta una e una sola regola.");
 
-        DecisionRule rule = rules.getFirst();
+        DecisionRule rule = rules.get(0);
         // Controlliamo che il nome della regola contenga parte della condizione (come indicatore)
         assertTrue(rule.getName().contains("if see object with"),
                 "Il nome della regola dovrebbe contenere la descrizione della condizione.");
@@ -94,7 +94,7 @@ public class ManualDslParserTest {
         assertNotNull(rules, "La lista di regole non deve essere null.");
         assertEquals(1, rules.size(), "Ci si aspetta una sola regola.");
 
-        DecisionRule rule = rules.getFirst();
+        DecisionRule rule = rules.get(0);
         // Creiamo un SenseData che NON soddisfa la condizione (color è RED invece di BLUE)
         SenseData senseData = createSenseData(8, "RED", 2);
         assertFalse(rule.applies(senseData),

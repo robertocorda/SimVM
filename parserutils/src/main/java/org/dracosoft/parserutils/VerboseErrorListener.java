@@ -1,6 +1,8 @@
-package org.dracosoft.weightedrulepl;
+package org.dracosoft.parserutils;
 
-import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.BaseErrorListener;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.Recognizer;
 
 public class VerboseErrorListener extends BaseErrorListener {
     @Override

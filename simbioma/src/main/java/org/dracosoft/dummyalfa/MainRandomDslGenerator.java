@@ -19,7 +19,7 @@ public class MainRandomDslGenerator {
             String dslProgram = RandomDSLProgramGenerator.generateProgram(1);
             ManualDecisionRuleParser parser = new ManualDecisionRuleParser();
             List<DecisionRule> rules = parser.parseRules(dslProgram);
-            DecisionRule rule = rules.getFirst();
+            DecisionRule rule = rules.get(0);
 
 
             // Creiamo un SenseData che soddisfa la condizione: distance=3, color=RED, speed=4.

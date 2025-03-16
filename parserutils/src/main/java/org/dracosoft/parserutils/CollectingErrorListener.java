@@ -1,4 +1,4 @@
-package org.dracosoft.weightedrulepl;
+package org.dracosoft.parserutils;
 
 import org.antlr.v4.runtime.*;
 
